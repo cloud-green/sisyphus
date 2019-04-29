@@ -10,6 +10,9 @@ lint:
 .PHONY: snap
 snap: sisyphus_$(SISYPHUS_VERSION)_amd64.snap
 
+sisyphus_$(SISYPHUS_VERSION)_amd64.snap:
+	snapcraft
+
 .PHONY: charm
 charm: charm/builds/sisyphus
 
