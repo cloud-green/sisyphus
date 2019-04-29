@@ -1,6 +1,7 @@
 options:
   config:
     type: string
+    default: ''
     description: |-
       The configuration for Sisyphus
   kafka-client-id:
