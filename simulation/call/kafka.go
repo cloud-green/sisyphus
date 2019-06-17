@@ -51,12 +51,16 @@ func (c *kafkaCallBackend) Do(ctx context.Context, call config.Call, attributes 
 	if !ok {
 		return attributes, errors.Errorf("attribute %q not defined", messageTopic)
 	}
-	a := Attributes(bodyContent)
 	keyString, ok := attributes[messageKey]
 	if !ok {
 		return attributes, errors.Errorf("attribute %q not defined", messageKey)
 	}
+	a := Attributes(bodyContent)
+	for k, v := range attributes {
+		a[k] = v
+	}
 	key := a.renderMessageKey(keyString.(string))
+
 	msg := &sarama.ProducerMessage{
 		Topic:     fmt.Sprintf("%v", topic),
 		Key:       sarama.StringEncoder(fmt.Sprintf("%v", key)),
