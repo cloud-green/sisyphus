@@ -287,6 +287,10 @@ func (a *AttributeDistribution) Sample() (interface{}, error) {
 	switch a.Type {
 	case config.ConstantIntAttributeType:
 		return a.Value, nil
+	case config.MapAttributeType:
+		return a.MapValue, nil
+	case config.MapListAttributeType:
+		return a.MapValues, nil
 	case config.RandomIntAttributeType:
 		return int(math.Floor(a.Min + (a.Max-a.Min)*rand.Float64())), nil
 	case config.PowerIntAttributeType:

@@ -30,7 +30,7 @@ func main() {
 
 	data, err := ioutil.ReadFile(Config())
 	if err != nil {
-		zapctx.Error(ctx, "failed to read the configuration file", zaputil.Error(err))
+		zapctx.Error(ctx, "failed to read the configuration file [%q]", zap.String("config", Config()), zaputil.Error(err))
 		return
 	}
 
