@@ -57,7 +57,9 @@ func TestKafkaCallBackend(t *testing.T) {
 	}, {
 		about: "a call with parameters - everything should be ok",
 		attributes: call.Attributes(map[string]interface{}{
-			"message-key":     "test-key",
+			"key-part1":       "test",
+			"key-part2":       "key",
+			"message-key":     "{key-part1}-{key-part2}",
 			"message-topic":   "test-topic",
 			"test-attribute1": 10,
 			"test-attribute2": "hello world",
