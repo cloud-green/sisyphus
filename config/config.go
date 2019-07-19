@@ -156,6 +156,8 @@ type AttributeType string
 
 var (
 	ConstantIntAttributeType    = AttributeType("int")
+	MapAttributeType            = AttributeType("map")
+	MapListAttributeType        = AttributeType("map-list")
 	RandomIntAttributeType      = AttributeType("random_int")
 	NormalIntAttributeType      = AttributeType("normal_int")
 	PowerIntAttributeType       = AttributeType("power_int")
@@ -174,6 +176,8 @@ var (
 type Attribute struct {
 	// Type may be on of the following:
 	// - constant: means the attribute has the value set in Value
+	// - map-list: means the attribute take value from the MapValues
+	// - map: means the attribute taks value from the MapValue
 	// - random: meaning a random value between Min and Max
 	//           should be chosen
 	// - power: meaning the sampled valued of the attribute should
@@ -189,12 +193,14 @@ type Attribute struct {
 	//          list will be chosen
 	// - random_subset: meaning a random subset of Values will
 	//          be chosen
-	Type        AttributeType `yaml:"type"`
-	StringValue string        `yaml:"string-value,omitempty"`
-	Value       float64       `yaml:"value,omitempty"`
-	Min         float64       `yaml:"min,omitempty"`
-	Max         float64       `yaml:"max,omitempty"`
-	N           float64       `yaml:"n,omitempty"`
-	StdDev      float64       `yaml:"std-dev,omitempty"`
-	Values      []interface{} `yaml:"values,omitempty"`
+	Type        AttributeType       `yaml:"type"`
+	StringValue string              `yaml:"string-value,omitempty"`
+	Value       float64             `yaml:"value,omitempty"`
+	Min         float64             `yaml:"min,omitempty"`
+	Max         float64             `yaml:"max,omitempty"`
+	N           float64             `yaml:"n,omitempty"`
+	StdDev      float64             `yaml:"std-dev,omitempty"`
+	Values      []interface{}       `yaml:"values,omitempty"`
+	MapValue    map[string]string   `yaml:"map-value,omitempty"`
+	MapValues   []map[string]string `yaml:"map-values,omitempty"`
 }
